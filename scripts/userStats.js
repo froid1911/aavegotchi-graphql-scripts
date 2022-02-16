@@ -23,15 +23,16 @@ async function main() {
 
   let last = "0";
   let allUsers = [];
-  for (let i = 0; i < 30000; i += 1000) {
-    let { users } = await queryFn(last);
-
+  let users = [];
+  do {
+    let data = await queryFn(last);
+    users = data.users;
     if (!users || users.length === 0) {
       break;
     }
     allUsers = allUsers.concat(users);
     last = users[users.length - 1].id;
-  }
+  } while (users.length > 0);
 
   const usersWithGotchisAndWithParcels = allUsers.filter(
     (e) => e.gotchisOwned.length > 0 && e.parcelsOwned.length > 0
@@ -72,8 +73,6 @@ async function main() {
   console.log(
     "# gotchis of owners without parcels: " + gotchisWithOwnersWithoutParcels
   );
-
-  // console.log("gotchis: " + Object.keys(skip).length);
 }
 
 main();
