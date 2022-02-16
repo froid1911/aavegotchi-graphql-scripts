@@ -3,18 +3,7 @@ const apollo = require("apollo-fetch");
 
 const graph = apollo.createApolloFetch({ uri: process.env.GRAPH_URL });
 
-// 0-50
-// 51-100
-// 101-200
-// 201-500
-// 500-1000
-
-let skipGotchis = {};
-let stats = {};
-
 async function main() {
-  let promisses = [];
-
   const queryFn = async (lastId) => {
     let query = `
     {users(orderBy: id orderDirection: asc first:1000 where:{id_gt: "${lastId}"}) {
@@ -44,8 +33,6 @@ async function main() {
     last = users[users.length - 1].id;
   }
 
-  console.log(allUsers.length);
-
   const usersWithGotchisAndWithParcels = allUsers.filter(
     (e) => e.gotchisOwned.length > 0 && e.parcelsOwned.length > 0
   );
@@ -61,7 +48,7 @@ async function main() {
   const usersWithoutGotchiAndWithParcel = allUsers.filter(
     (e) => e.gotchisOwned.length === 0 && e.parcelsOwned.length > 0
   );
-  console.log(usersWithGotchisButWithoutParcels);
+
   const usersAmount = usersWithGotchisButWithoutParcels.length;
   const gotchisWithOwnersWithoutParcels = usersWithGotchisButWithoutParcels
     .map((e) => e.gotchisOwned.length)
