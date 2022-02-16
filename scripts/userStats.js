@@ -55,23 +55,23 @@ async function main() {
     .map((e) => e.gotchisOwned.length)
     .reduce((prev, e) => prev + e);
 
-  console.log("# overall owners: " + allUsers.length);
+  console.log("# overall users: " + allUsers.length);
   console.log(
-    "# owners without gotchi and without parcel: " +
+    "# users without gotchi and without parcel: " +
       usersWithoutGotchiAndParcel.length
   );
-  console.log("# owners with gotchis, but without parcels: " + usersAmount);
+  console.log("# users with gotchis, but without parcels: " + usersAmount);
   console.log(
-    "# owners with gotchis and with parcels: " +
+    "# users with gotchis and with parcels: " +
       usersWithGotchisAndWithParcels.length
   );
   console.log(
-    "# owners without gotchi, but with parcels: " +
+    "# users without gotchi, but with parcels: " +
       usersWithoutGotchiAndWithParcel.length
   );
 
   console.log(
-    "# gotchis of owners without parcels: " + gotchisWithOwnersWithoutParcels
+    "# gotchis of users without parcels: " + gotchisWithOwnersWithoutParcels
   );
 }
 
